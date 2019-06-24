@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {User} from './User';
 
@@ -8,20 +8,18 @@ import {User} from './User';
 })
 export class CredentialsService {
 
-  path = 'http://localhost:3000/user';
+  path = 'http://localhost:3000/credentials';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
 
-  registerUser(user) : Observable<User> {
+  registerUser(user) {
 
     const options = {
-      body: {
-        user : user
-      }
+      body: user
     };
 
-    return this.http.post<User>(this.path, options.body);
+    return this.http.post(this.path, options.body);
   }
 
 

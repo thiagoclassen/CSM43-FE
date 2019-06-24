@@ -19,6 +19,11 @@ export class AppComponent {
       title: 'Login',
       url: '/sign-up',
       icon: 'list'
+    },
+    {
+      title: 'Restaurantes',
+      url: '/restaurants',
+      icon: 'list'
     }
   ];
 

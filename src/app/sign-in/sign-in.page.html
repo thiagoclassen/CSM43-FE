@@ -1,9 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>sign-in</ion-title>
+    <ion-title>Logar</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-input [(ngModel)]="login" placeholder="Login" ></ion-input>
+  <ion-input [(ngModel)]="password" placeholder="Senha" inputmode="password"></ion-input>
+  <ion-button (click)= "loginUser()" color="primary">Logar</ion-button>
+  <ion-button routerLink="/sign-up" routerDirection="root" color="primary">Novo Usuario</ion-button>
 </ion-content>

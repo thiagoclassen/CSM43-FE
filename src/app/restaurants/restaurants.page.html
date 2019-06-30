@@ -8,5 +8,13 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-item *ngFor="let restaurant of restaurants">
+      <ion-icon [name]="restaurant.icon" slot="start"></ion-icon>
+      {{restaurant.name}}
+      <div class="item-note" slot="end">
+        {{restaurant.name}}
+      </div>
+    </ion-item>
+  </ion-list>
 </ion-content>

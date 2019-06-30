@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'sign-up',
+    redirectTo: 'sign-in',
     pathMatch: 'full'
   },
   {
@@ -17,10 +17,19 @@ const routes: Routes = [
   },
   {
     path: 'sign-up',
-    loadChildren: './sign-up/sign-up.module#SignUpPageModule' 
+    loadChildren: './sign-up/sign-up.module#SignUpPageModule'
   },
-  { path: 'restaurants', loadChildren: './restaurants/restaurants.module#RestaurantsPageModule' },
-  { path: 'sign-in', loadChildren: './sign-in/sign-in.module#SignInPageModule' }
+  {
+    path: 'restaurants',
+    loadChildren: './restaurants/restaurants.module#RestaurantsPageModule'
+  },
+  {
+    path: 'sign-in',
+    loadChildren: './sign-in/sign-in.module#SignInPageModule'
+  },
+  { 
+    path: 'restaurant-form', 
+    loadChildren: './restaurants/restaurant-form/restaurant-form.module#RestaurantFormPageModule' }
 ];
 
 @NgModule({
@@ -29,4 +38,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

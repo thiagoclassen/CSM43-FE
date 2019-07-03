@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { User } from './User';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,13 @@ export class CredentialsService {
   constructor(private http: HttpClient) { }
 
 
-  registerUser(user) {
+  registerUser(user: User) {
 
     const options = {
       body: user
     };
 
-    return this.http.post(this.path, options.body);
+    return this.http.post(this.path, user);
   }
 
 

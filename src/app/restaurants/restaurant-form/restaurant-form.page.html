@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
     <ion-title>restaurant-form</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-input [(ngModel)]="name" placeholder="Nome" ></ion-input>
+  <ion-input [(ngModel)]="description" placeholder="Descrição"></ion-input>
+  <ion-input [(ngModel)]="localization" placeholder="Localização"></ion-input>
+  <ion-input [(ngModel)]="tables" placeholder="Mesas"></ion-input>
+  <ion-input [(ngModel)]="manager" placeholder="Gerente"></ion-input>
+  <ion-button (click)= "registerRestaurant()" color="primary">Registrar</ion-button>
 </ion-content>

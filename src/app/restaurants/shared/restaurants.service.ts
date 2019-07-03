@@ -10,8 +10,12 @@ export class RestaurantsService {
 
   constructor(private http: HttpClient) { }
 
-  getRestaurants(){
+  getRestaurants() {
     // TODO
+  }
+
+  createRestaurant() {
+
   }
 
 }

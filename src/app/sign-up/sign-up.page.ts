@@ -10,6 +10,8 @@ import { NavController } from '@ionic/angular';
 })
 export class SignUpPage implements OnInit {
 
+  private user: User = new User();
+
   constructor(private credentialService: CredentialsService,
               public navCtrl: NavController) { }
 
@@ -17,9 +19,9 @@ export class SignUpPage implements OnInit {
   }
 
   registerUser() {
-    const user = new User(null, 'teste', 4);
+    this.user.permissionLevel = 4;
     this.credentialService
-    .registerUser({id : null, name : 'teste', permissionLevel: 4})
+    .registerUser(this.user)
     .subscribe( response => {
       console.log(response);
       this.navCtrl.navigateForward('/home');

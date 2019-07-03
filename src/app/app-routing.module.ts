@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -27,8 +28,9 @@ const routes: Routes = [
     path: 'sign-in',
     loadChildren: './sign-in/sign-in.module#SignInPageModule'
   },
-  { 
-    path: 'restaurant-form', 
+  {
+    path: 'restaurant-form',
+    canActivate: [AuthGuard],
     loadChildren: './restaurants/restaurant-form/restaurant-form.module#RestaurantFormPageModule' }
 ];
 

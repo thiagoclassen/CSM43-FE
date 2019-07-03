@@ -24,6 +24,11 @@ export class AppComponent {
       title: 'Restaurantes',
       url: '/restaurants',
       icon: 'list'
+    },
+    {
+      title: 'Cadastro Restaurantes',
+      url: '/restaurant-form',
+      icon: 'list'
     }
   ];
 

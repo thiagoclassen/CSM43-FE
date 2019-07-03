@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CredentialsService } from '../sign-up/shared/credentials.service';
 import { User } from '../sign-up/shared/User';
 import { NavController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-sign-in',
@@ -9,19 +10,23 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./sign-in.page.scss'],
 })
 export class SignInPage implements OnInit {
+  private login = {};
 
-  private login:string;
-  private password:string;
+  constructor(
+    private credentialService: CredentialsService,
+    private storage: Storage,
+    private navCtrl: NavController) { }
 
-  constructor(private credentialService: CredentialsService,
-    public navCtrl: NavController) { }
-
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   loginUser() {
-    console.log(this.login, this.password)
-    this.navCtrl.navigateForward('/home');    
+    this.credentialService.login(this.login).subscribe(response =>
+      this.storage.ready().then((stuff) => {
+        this.storage.set('token', response.token);
+        this.storage.set('userId', response.userId);
+        console.log('service Done');
+        this.navCtrl.navigateForward('/home');
+      }).catch(err => { console.log('errr', err) }));
   }
 
 }

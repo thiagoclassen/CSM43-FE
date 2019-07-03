@@ -8,10 +8,10 @@
 </ion-header>
 
 <ion-content>
-  <ion-input [(ngModel)]="name" placeholder="Nome" ></ion-input>
-  <ion-input [(ngModel)]="description" placeholder="Descrição"></ion-input>
-  <ion-input [(ngModel)]="localization" placeholder="Localização"></ion-input>
-  <ion-input [(ngModel)]="tables" placeholder="Mesas"></ion-input>
-  <ion-input [(ngModel)]="manager" placeholder="Gerente"></ion-input>
+  <ion-input [(ngModel)]="restaurant.name" placeholder="Nome" ></ion-input>
+  <ion-input [(ngModel)]="restaurant.description" placeholder="Descrição"></ion-input>
+  <ion-input [(ngModel)]="restaurant.localization" placeholder="Localização"></ion-input>
+  <ion-input [(ngModel)]="restaurant.tables" placeholder="Mesas"></ion-input>
+  <!-- <ion-input [(ngModel)]="owner" placeholder="Gerente"></ion-input> -->
   <ion-button (click)= "registerRestaurant()" color="primary">Registrar</ion-button>
 </ion-content>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RestaurantsService } from '../shared/restaurants.service'
 
 @Component({
   selector: 'app-restaurant-form',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RestaurantFormPage implements OnInit {
 
-  constructor() { }
+  constructor(private restaurantService: RestaurantsService) { }
+
+  private restaurant = {};
 
   ngOnInit() {
+  }
+
+  registerRestaurant(restaurant:any){
+    this.restaurantService
+      .createRestaurant(this.restaurant)
+      .subscribe(response => console.log(response));
   }
 
 }

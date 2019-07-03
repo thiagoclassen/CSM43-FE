@@ -30,7 +30,7 @@ const routes: Routes = [
   },
   {
     path: 'restaurant-form',
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     loadChildren: './restaurants/restaurant-form/restaurant-form.module#RestaurantFormPageModule' }
 ];
 

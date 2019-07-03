@@ -15,9 +15,8 @@ export class RestaurantsPage implements OnInit {
   ngOnInit() {
 
     this.restaurantService
-    .getRestaurants()
-      //.subscribe(response => this.restaurants = response)
-
+      .listRestaurants()
+      .subscribe(response => this.restaurants = response);
   }
 
 }

@@ -31,7 +31,12 @@ const routes: Routes = [
   {
     path: 'restaurant-form',
     //canActivate: [AuthGuard],
-    loadChildren: './restaurants/restaurant-form/restaurant-form.module#RestaurantFormPageModule' }
+    loadChildren: './restaurants/restaurant-form/restaurant-form.module#RestaurantFormPageModule'
+  },
+  {
+    path: 'restaurant/:id',
+    loadChildren: './restaurants/restaurant-view/restaurant-view.module#RestaurantViewPageModule'
+  }
 ];
 
 @NgModule({

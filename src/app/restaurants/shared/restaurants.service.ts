@@ -17,7 +17,8 @@ export class RestaurantsService {
     return this.http.get<any[]>(this.path);
   }
 
-  getRestautant(id: number) {
+  getRestautant(id): Observable<any> {
+    console.log('called id:', id)
     return this.http.get<any>(this.path + id);
   }
 

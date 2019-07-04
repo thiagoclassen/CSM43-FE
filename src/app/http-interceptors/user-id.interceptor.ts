@@ -8,27 +8,24 @@ import { TokenService } from '../guard/token.service'
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export class UserIdInterceptor implements HttpInterceptor {
 
-    private token;
+    private userId;
 
     constructor(private tokenService: TokenService) { }
 
     intercept(req: HttpRequest<any>,
         next: HttpHandler): Observable<HttpEvent<any>> {
 
-        this.token = this.tokenService.getToken();
+        this.userId = this.tokenService.getUserId();
 
-        if (this.token) {
-            console.log(this.token);
-            const cloned = req.clone({
-                headers: req.headers.set("Authorization",
-                    "Bearer " + this.token)
-            });
-
+        if (req.url.search(':userId') != -1) {
+            let cloned = req.clone();
+            cloned.url.replace('/:userId/', this.userId);
+            console.info('UserId Interceptor, match: ', this.userId);
             return next.handle(cloned);
-        }
-        else {
+        } else {
+            console.info('UserId Interceptor, no match.');
             return next.handle(req);
         }
     }

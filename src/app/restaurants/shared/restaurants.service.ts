@@ -25,8 +25,8 @@ export class RestaurantsService {
   createRestaurant(restaurant: any): Observable<any> {
 
     let headers: HttpHeaders = new HttpHeaders();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJkZTVmMTM1LTAyYzEtNGNlMS1hMWFjLTZlNTBkYzRhZjZhZiIsIm5hbWUiOiJhZG1pbiIsImxvZ2luVHlwZSI6InBhc3N3b3JkIiwicGVybWlzc2lvbkxldmVsIjo5OSwiaWF0IjoxNTYyMTUyNTA0LCJleHAiOjE1NjIxNTYxMDR9.f86fk65X_k1A4B6chyxKd3UcQV2cjiJ9ts8Z9TMriTI');
+    //headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    //headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJkZTVmMTM1LTAyYzEtNGNlMS1hMWFjLTZlNTBkYzRhZjZhZiIsIm5hbWUiOiJhZG1pbiIsImxvZ2luVHlwZSI6InBhc3N3b3JkIiwicGVybWlzc2lvbkxldmVsIjo5OSwiaWF0IjoxNTYyMTUyNTA0LCJleHAiOjE1NjIxNTYxMDR9.f86fk65X_k1A4B6chyxKd3UcQV2cjiJ9ts8Z9TMriTI');
     return this.http.post(this.user_path, restaurant, {headers});
   }
 

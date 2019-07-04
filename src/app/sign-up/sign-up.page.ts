@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CredentialsService } from './shared/credentials.service';
-import { User } from './shared/User';
+import { CredentialsService } from '../user/credentials.service';
+import { User } from '../user/User';
 import { NavController } from '@ionic/angular';
+import { TokenService } from '../guard/token.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,17 +14,17 @@ export class SignUpPage implements OnInit {
   private user: User = new User();
 
   constructor(private credentialService: CredentialsService,
-              public navCtrl: NavController) { }
+    public navCtrl: NavController,
+    private tokenService: TokenService) { }
 
   ngOnInit() {
   }
 
   registerUser() {
     this.user.permissionLevel = 4;
-    this.credentialService
-    .registerUser(this.user)
-    .subscribe( response => {
-      console.log(response);
+    this.credentialService.registerUser(this.user).subscribe(response => {
+      this.tokenService.setToken(response.token);
+      this.tokenService.setUserId(response.userId);
       this.navCtrl.navigateForward('/home');
     });
   }

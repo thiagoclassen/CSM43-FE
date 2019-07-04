@@ -17,7 +17,7 @@ export class CredentialsService {
 
   registerUser(user: User) {
 
-    return this.http.post(this.path + '/signup', user).pipe(catchError(error => {
+    return this.http.post<any>(this.path + '/signup', user).pipe(catchError(error => {
       console.log(error)
       return throwError(error);
     }));
@@ -26,6 +26,5 @@ export class CredentialsService {
   login(login: any) {
     return this.http.post<any>(this.path + '/login', login);
   }
-
 
 }

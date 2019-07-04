@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CredentialsService } from '../sign-up/shared/credentials.service';
-import { User } from '../sign-up/shared/User';
+import { CredentialsService } from '../user/credentials.service';
+import { User } from '../user/User';
 import { NavController } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
+import { TokenService } from '../guard/token.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,19 +14,17 @@ export class SignInPage implements OnInit {
 
   constructor(
     private credentialService: CredentialsService,
-    private storage: Storage,
+    private tokenService: TokenService,
     private navCtrl: NavController) { }
 
   ngOnInit() { }
 
   loginUser() {
-    this.credentialService.login(this.login).subscribe(response =>
-      this.storage.ready().then((stuff) => {
-        this.storage.set('token', response.token);
-        this.storage.set('userId', response.userId);
-        console.log('service Done');
-        this.navCtrl.navigateForward('/home');
-      }).catch(err => { console.log('errr', err) }));
+    this.credentialService.login(this.login).subscribe(response => {
+      this.tokenService.setToken(response.token);
+      this.tokenService.setUserId(response.userId);
+      this.navCtrl.navigateForward('/home');
+    });
   }
 
 }

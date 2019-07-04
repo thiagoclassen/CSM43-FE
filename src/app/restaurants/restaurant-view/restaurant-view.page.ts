@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RestaurantsService } from '../shared/restaurants.service';
+import { RestaurantsService } from '../restaurants.service';
+import { Restaurant } from '../restaurant';
 
 @Component({
   selector: 'app-restaurant-view',
@@ -9,14 +10,15 @@ import { RestaurantsService } from '../shared/restaurants.service';
 })
 export class RestaurantViewPage implements OnInit {
 
-  private restaurant:any;
+  private restaurant: Restaurant;
 
   constructor(
     private route: ActivatedRoute,
     private restaurantsService: RestaurantsService
   ) { }
 
-  ngOnInit() {    
+  ngOnInit() {
+    this.restaurant = new Restaurant();
     let id = this.route.snapshot.paramMap.get('id');    
     this.restaurantsService.getRestautant(id).subscribe(response => this.restaurant = response);
   }

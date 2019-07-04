@@ -22,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'restaurants',
-    loadChildren: './restaurants/restaurants.module#RestaurantsPageModule'
+    loadChildren: './restaurants/restaurant-list/restaurants.module#RestaurantsPageModule'
   },
   {
     path: 'sign-in',

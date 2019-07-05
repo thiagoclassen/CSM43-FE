@@ -23,4 +23,11 @@ export class ReservationService {
 
     return this.http.get<any[]>(url);
   }
+
+  deleteReservation(reservationId: string, restaurantId: string) {
+    let url = this.reservation_path.replace(':restaurantId', restaurantId).replace(':reservationId', reservationId);
+    url = url.replace(':reservationId', reservationId);
+
+    return this.http.delete<any[]>(url);
+  }
 }

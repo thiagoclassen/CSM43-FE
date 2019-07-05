@@ -45,6 +45,11 @@ export class RestaurantsService {
     return this.http.post(url, {});
   }
 
+  deleteFavorite(restaurantId: string) {
+    let url = this.favorites_path.replace(':restaurantId', restaurantId);
+    return this.http.delete(url, {});
+  }
+
   listFavorites(): Observable<any[]> {
     return this.http.get<any[]>(this.list_favorites_path);
   }

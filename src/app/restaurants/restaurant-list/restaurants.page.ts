@@ -30,6 +30,12 @@ export class RestaurantsPage implements OnInit {
     });
   }
 
+  removeFavorite(restaurantId: string) {
+    this.restaurantService.deleteFavorite(restaurantId).subscribe(() => {
+      this.favorites.splice(this.favorites.findIndex(({id}) => id == restaurantId), 1);
+    });
+  }
+
   isFavorite(restaurantId: string): Boolean {
 
     let result: Boolean = false;

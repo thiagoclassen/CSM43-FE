@@ -9,7 +9,7 @@ import { Reservation } from "../reservation";
 })
 export class ReservationsListPage implements OnInit {
 
-  reservations: Reservation[];
+  reservations: any[];
 
   constructor(private reservationService: ReservationService) { }
 
@@ -18,6 +18,13 @@ export class ReservationsListPage implements OnInit {
     this.reservationService
       .listReservations()
       .subscribe(response => this.reservations = response);
+  }
+
+  removeReservation(reservationId: string, restaurantId: string) {
+    this.reservationService
+      .deleteReservation(reservationId, restaurantId).subscribe(() => {
+        this.reservations.splice(this.reservations.findIndex(({ id }) => id == reservationId), 1);
+      });
   }
 
 }

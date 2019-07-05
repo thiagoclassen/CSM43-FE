@@ -8,5 +8,19 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Reserva</ion-card-subtitle>
+      <ion-card-title>{{reservation.restaurant.name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Data: {{reservation.date | date}} Mesas: {{reservation.tables}}
+    </ion-card-content>
+  </ion-card>
+  <ion-button color="primary" [routerLink]="['/restaurant', reservation.restaurant.id]">
+    Ver Restaurate
+  </ion-button>
+  <ion-button color="secondary" (click)="removeReservation(reservation.id, reservation.restaurant.id)">
+    Cancelar Reserva
+  </ion-button>
 </ion-content>

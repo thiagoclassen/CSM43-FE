@@ -24,7 +24,6 @@ export class UserIdInterceptor implements HttpInterceptor {
                 url: req.url.replace(':userId', this.userId)
             });
             console.info('UserId Interceptor, match: ', this.userId);
-            console.log(cloned);
             return next.handle(cloned);
         } else {
             console.info('UserId Interceptor, no match.');

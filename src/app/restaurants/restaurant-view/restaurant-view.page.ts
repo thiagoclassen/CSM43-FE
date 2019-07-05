@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RestaurantsService } from '../restaurants.service';
 import { Restaurant } from '../restaurant';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Component({
   selector: 'app-restaurant-view',
@@ -17,7 +18,8 @@ export class RestaurantViewPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private restaurantsService: RestaurantsService
+    private restaurantsService: RestaurantsService,
+    private localNotifications: LocalNotifications
   ) { }
 
   ngOnInit() {
@@ -28,6 +30,7 @@ export class RestaurantViewPage implements OnInit {
       this.restaurant = response;
       this.loadTableOptions();
     });
+    this.setNotification();
   }
 
   loadTableOptions() {
@@ -40,6 +43,14 @@ export class RestaurantViewPage implements OnInit {
     this.restaurantsService.createReservation(this.restaurantId, this.tableReservation).subscribe(response => console.log(response));
   }
 
-
+  setNotification() {
+    console.log('called');
+    this.localNotifications.schedule([{
+      id: 1,
+      title: 'Local ILocalNotification Example',
+      text: 'Multi ILocalNotification 2',
+      icon: 'http://example.com/icon.png'
+    }]);
+  }
 
 }

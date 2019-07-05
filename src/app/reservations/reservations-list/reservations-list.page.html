@@ -10,15 +10,16 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let reservation of reservations">
-        <div class="item-note" [routerLink]="['/reservation', reservation.restaurantId, reservation.id]">
-          {{reservation.id}}
-        </div>
-      <div class="item-note" [routerLink]="['/reservation', reservation.restaurantId, reservation.id]">
-        {{reservation.date}}
-      </div>
-      <div class="item-note" [routerLink]="['/reservation', reservation.restaurantId, reservation.id]">
-        {{reservation.tables}}
-      </div>
+        <ion-card [routerLink]="['/reservation', reservation.restaurantId, reservation.id]">
+            <ion-card-header>
+              <ion-card-subtitle>Restaurante</ion-card-subtitle>
+              <ion-card-title>{{reservation.restaurant.name}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              Data: {{reservation.date | date}} Mesas: {{reservation.tables}}
+            </ion-card-content>
+          </ion-card>       
+          <ion-button (click)="removeReservation(reservation.id, reservation.restaurant.id)" fill="outline" slot="end">Remover</ion-button>
     </ion-item>
   </ion-list>
 </ion-content>

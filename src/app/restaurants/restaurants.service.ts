@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SERVER } from '../env/server';
 import { Restaurant } from './restaurant';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class RestaurantsService {
 
   employee_path = SERVER + '/users/:userId/restaurants/:restaurantId/employees';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private localNotification: LocalNotifications) { }
 
   listRestaurants(): Observable<any[]> {
     return this.http.get<any[]>(this.restaurants_path);
@@ -38,9 +39,21 @@ export class RestaurantsService {
   createReservation(restaurantId: string, tables: number) {
 
     let url = this.reservations_path.replace(':restaurantId', restaurantId);
-    const reservation = { tables, date: this.tomorrowDate() }
+    const reservation = { tables, date: this.tomorrowDate() };
+
+    this.setNotification();
 
     return this.http.post(url, reservation);
+  }
+
+  setNotification() {
+    console.log('called');
+    this.localNotification.schedule([{
+      id: 1,
+      title: 'Reserva',
+      text: 'Vocë criou uma reserva!',
+      // icon: 'http://example.com/icon.png'
+    }]);
   }
 
   createFavorite(restaurantId: string) {

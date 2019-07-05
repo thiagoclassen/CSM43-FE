@@ -5,8 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-input [(ngModel)]="login.username" placeholder="Login" ></ion-input>
-  <ion-input [(ngModel)]="login.password" placeholder="Senha" inputmode="password"></ion-input>
-  <ion-button (click)= "loginUser()" color="primary">Logar</ion-button>
+  <ion-input [(ngModel)]="login.username" placeholder="Login"></ion-input>
+  <ion-input inputmode="password" [(ngModel)]="login.password" placeholder="Senha"></ion-input>
+  <ion-button (click)="loginUser()" color="primary">Logar</ion-button>
   <ion-button routerLink="/sign-up" routerDirection="root" color="primary">Novo Usuario</ion-button>
 </ion-content>

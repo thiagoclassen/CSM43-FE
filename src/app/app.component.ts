@@ -30,6 +30,11 @@ export class AppComponent {
       url: '/restaurant-form',
       icon: 'list'
     },
+    {
+      title: 'Sair',
+      url: '/sign-in',
+      icon: 'logout'
+    },
   ];
 
   constructor(

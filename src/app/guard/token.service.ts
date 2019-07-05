@@ -16,12 +16,11 @@ export class TokenService implements OnInit {
 
   ngOnInit() {
     this.storage.ready();
-    //this.storage.get("token").then(token => this.token = token);
   }
 
   getToken() {
     if (this.token == null) {
-      this.storage.get("token").then(token => {
+      this.storage.get('token').then(token => {
         this.token = token;
         console.info('Token Service Called, getToken: ', this.token);
         return this.token;
@@ -34,7 +33,7 @@ export class TokenService implements OnInit {
 
   getUserId() {
     if (this.userId == null) {
-      this.storage.get("userId").then(userId => {
+      this.storage.get('userId').then(userId => {
         this.userId = userId;
         console.info('Token Service Called, getUserId: ', this.userId);
         return this.userId;
@@ -49,6 +48,11 @@ export class TokenService implements OnInit {
     this.storage.set('token', token);
     this.token = token;
     console.info('Token Service Called, setToken: ', token);
+  }
+
+  logoutUser() {
+    this.setUserId('');
+    this.setToken('');
   }
 
   setUserId(userId) {

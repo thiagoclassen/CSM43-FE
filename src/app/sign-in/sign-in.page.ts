@@ -17,7 +17,9 @@ export class SignInPage implements OnInit {
     private tokenService: TokenService,
     private navCtrl: NavController) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.tokenService.logoutUser();
+  }
 
   loginUser() {
     this.credentialService.login(this.login).subscribe(response => {
@@ -26,5 +28,4 @@ export class SignInPage implements OnInit {
       this.navCtrl.navigateForward('/reservations-list');
     });
   }
-
 }

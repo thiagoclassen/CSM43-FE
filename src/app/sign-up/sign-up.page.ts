@@ -25,7 +25,7 @@ export class SignUpPage implements OnInit {
     this.credentialService.registerUser(this.user).subscribe(response => {
       this.tokenService.setToken(response.token);
       this.tokenService.setUserId(response.userId);
-      this.navCtrl.navigateForward('/home');
+      this.navCtrl.navigateForward('/reservations-list');
     });
   }
 

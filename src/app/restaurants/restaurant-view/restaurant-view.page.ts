@@ -11,9 +11,9 @@ import { Restaurant } from '../restaurant';
 export class RestaurantViewPage implements OnInit {
 
   private restaurant: Restaurant;
+  private restaurantId: string;
   private tableOptions: number[];
   private tableReservation: number;
-  private restaurantId: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,5 +39,7 @@ export class RestaurantViewPage implements OnInit {
   createReservation() {
     this.restaurantsService.createReservation(this.restaurantId, this.tableReservation).subscribe(response => console.log(response));
   }
+
+
 
 }

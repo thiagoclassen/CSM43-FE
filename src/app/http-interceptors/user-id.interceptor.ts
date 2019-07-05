@@ -20,9 +20,11 @@ export class UserIdInterceptor implements HttpInterceptor {
         this.userId = this.tokenService.getUserId();
 
         if (req.url.search(':userId') != -1) {
-            let cloned = req.clone();
-            cloned.url.replace('/:userId/', this.userId);
+            const cloned = req.clone({                
+                url: req.url.replace(':userId', this.userId)
+            });
             console.info('UserId Interceptor, match: ', this.userId);
+            console.log(cloned);
             return next.handle(cloned);
         } else {
             console.info('UserId Interceptor, no match.');

@@ -1,0 +1,25 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>{{starterCourse?.name}}</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-list>
+		<ion-item>
+			<ion-label>Nome: {{starterCourse?.name}}</ion-label>
+		</ion-item>
+		<ion-item>
+			<ion-label>Descrição: {{starterCourse?.description}}</ion-label>
+		</ion-item>
+		<ion-item>
+			<ion-label>Imagem: {{starterCourse?.photo}}</ion-label>
+		</ion-item>
+	</ion-list>
+	<ion-button [hidden]="!isEmployee" routerLink="/restaurant/{{restaurantId}}/starter-course-form"
+		[queryParams]="{editId: starterCourse?.id }">Editar</ion-button>
+	<ion-button [hidden]="!isEmployee" (click)="deleteStarterCourse(starterCourse.id)">Deletar</ion-button>
+</ion-content>

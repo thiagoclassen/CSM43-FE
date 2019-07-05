@@ -24,7 +24,7 @@ export class AppComponent {
       title: 'Cadastro Restaurantes',
       url: '/restaurant-form',
       icon: 'list'
-    }
+	}
   ];
 
   constructor(

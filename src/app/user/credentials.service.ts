@@ -10,7 +10,7 @@ import { throwError } from 'rxjs';
 })
 export class CredentialsService {
 
-  path = 'http://localhost:3000/credentials';
+  path = 'https://csm43-be.herokuapp.com/credentials'; 
 
   constructor(private http: HttpClient, private storage: Storage) { }
 

@@ -1,0 +1,30 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title [hidden]="startCourseIdEdit">Criar Entrada</ion-title>
+		<ion-title [hidden]="!startCourseIdEdit">Editar Entrada</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [hidden]="startCourseIdEdit">
+	<ion-input [(ngModel)]="starterCourse.name" placeholder="Nome"></ion-input>
+	<ion-input [(ngModel)]="starterCourse.description" placeholder="Descrição"></ion-input>
+	<ion-input [(ngModel)]="starterCourse.photo" placeholder="Photo"></ion-input>
+	<ion-button (click)="registerStarterCourse()" color="primary">Registrar</ion-button>
+</ion-content>
+
+<ion-content [hidden]="!startCourseIdEdit">
+	<ion-input [ngModel]="startCourseEdit?.name"
+		(ngModelChange)="startCourseEdit?.name ? startCourseEdit.name = $event : null" placeholder="Nome">
+	</ion-input>
+	<ion-input [ngModel]="startCourseEdit?.description"
+		(ngModelChange)="startCourseEdit?.description ? startCourseEdit.description = $event : null"
+		placeholder="Description">
+	</ion-input>
+	<ion-input [ngModel]="startCourseEdit?.photo"
+		(ngModelChange)="startCourseEdit?.photo ? startCourseEdit.photo = $event : null" placeholder="Photo">
+	</ion-input>
+	<ion-button (click)="editStarterCourse()" color="primary">Editar</ion-button>
+</ion-content>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SERVER } from '../env/server';
+import { Restaurant } from './restaurant';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,8 @@ export class RestaurantsService {
   favorites_path = SERVER + '/users/:userId/restaurants/:restaurantId/favorites';
 
   list_favorites_path = SERVER + '/users/:userId/favorites';
+
+  employee_path = SERVER + '/users/:userId/restaurants/:restaurantId/employees';
 
   constructor(private http: HttpClient) { }
 
@@ -54,11 +57,21 @@ export class RestaurantsService {
     return this.http.get<any[]>(this.list_favorites_path);
   }
 
+  getMyRestaurant(): Observable<any[]> {
+    return this.http.get<any[]>(this.user_path + 'owner');
+  }
+
+  hireEmployee(restaurantId: string, employees: any) {
+    let url = this.employee_path.replace(':restaurantId', restaurantId);
+    return this.http.post(url, employees);
+  }
+
   tomorrowDate() {
     const today = new Date();
     let tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 1);
     return tomorrow;
   }
+
 
 }

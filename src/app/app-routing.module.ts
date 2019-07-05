@@ -40,25 +40,33 @@ const routes: Routes = [
   {
     path: 'reservation/:restaurantId/:reservationId',
     loadChildren: './reservations/reservation-view/reservation-view.module#ReservationViewPageModule'
-  }
+  },
   {
-		path: 'restaurant/:restaurantId/starter-course/:id',
-		loadChildren: './course/starter-course-view/starter-course-view.module#StarterCourseViewPageModule'
-	},
-	{
-		path: 'restaurant/:restaurantId/starter-courses',
-		loadChildren: './course/starter-course-list/starter-course-list.module#StarterCourseListPageModule'
-	},
-	{
-		path: 'restaurant/:restaurantId/starter-course-form',
-		loadChildren: './course/starter-course-form/starter-course-form.module#StarterCourseFormPageModule'
-	}
+    path: 'restaurant/:restaurantId/starter-course/:id',
+    loadChildren: './course/starter-course-view/starter-course-view.module#StarterCourseViewPageModule'
+  },
+  {
+    path: 'restaurant/:restaurantId/starter-courses',
+    loadChildren: './course/starter-course-list/starter-course-list.module#StarterCourseListPageModule'
+  },
+  {
+    path: 'restaurant/:restaurantId/starter-course-form',
+    loadChildren: './course/starter-course-form/starter-course-form.module#StarterCourseFormPageModule'
+  },
+  {
+    path: 'my-restaurant',
+    loadChildren: './restaurants/my-restaurant/my-restaurant.module#MyRestaurantPageModule'
+  },
+  {
+    path: 'employee/:restaurantId',
+    loadChildren: './restaurants/employee/employee.module#EmployeePageModule'
+  }
 ];
 
 @NgModule({
-	imports: [
-		RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-	],
-	exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+  ],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

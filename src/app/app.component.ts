@@ -21,10 +21,15 @@ export class AppComponent {
       icon: 'list'
     },
     {
+      title: 'Meu Restaurantes',
+      url: '/my-restaurant',
+      icon: 'list'
+    },
+    {
       title: 'Cadastro Restaurantes',
       url: '/restaurant-form',
       icon: 'list'
-	}
+    },
   ];
 
   constructor(

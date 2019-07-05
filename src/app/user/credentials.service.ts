@@ -3,14 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { User } from './User';
 import { Storage } from '@ionic/storage';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
+import { SERVER } from '../env/server';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CredentialsService {
 
-  path = 'https://csm43-be.herokuapp.com/credentials'; 
+  path = SERVER + '/credentials';
 
   constructor(private http: HttpClient, private storage: Storage) { }
 
@@ -25,6 +26,10 @@ export class CredentialsService {
 
   login(login: any) {
     return this.http.post<any>(this.path + '/login', login);
+  }
+
+  listUsers(): Observable<any[]> {
+    return this.http.get<any[]>(SERVER + '/users');
   }
 
 }

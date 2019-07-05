@@ -1,0 +1,15 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>Criar Entrada</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-input [(ngModel)]="starterCourse.name" placeholder="Nome"></ion-input>
+	<ion-input [(ngModel)]="starterCourse.description" placeholder="Descrição"></ion-input>
+	<ion-input [(ngModel)]="starterCourse.photo" placeholder="Photo"></ion-input>
+	<ion-button (click)="registerStarterCourse()" color="primary">Registrar</ion-button>
+</ion-content>

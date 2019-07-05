@@ -36,7 +36,11 @@ const routes: Routes = [
   {
     path: 'restaurant/:id',
     loadChildren: './restaurants/restaurant-view/restaurant-view.module#RestaurantViewPageModule'
-  }
+  },
+  { path: 'starter-course/:id', loadChildren: './course/starter-course-view/starter-course-view.module#StarterCourseViewPageModule' },
+  { path: 'starter-courses', loadChildren: './course/starter-course-list/starter-course-list.module#StarterCourseListPageModule' },
+  { path: 'starter-course-form', loadChildren: './course/starter-course-form/starter-course-form.module#StarterCourseFormPageModule' }
+
 ];
 
 @NgModule({

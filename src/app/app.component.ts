@@ -29,7 +29,17 @@ export class AppComponent {
       title: 'Cadastro Restaurantes',
       url: '/restaurant-form',
       icon: 'list'
-    }
+	},
+	{
+		title: 'Entradas',
+		url: '/starter-courses',
+		icon: 'list'
+	},
+	{
+		title: 'Cadastro Entradas',
+		url: '/starter-course-form',
+		icon: 'list'
+	  },
   ];
 
   constructor(

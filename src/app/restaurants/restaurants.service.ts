@@ -9,7 +9,7 @@ export class RestaurantsService {
 
   path = 'http://localhost:3000/restaurants/';
 
-  user_path = 'http://localhost:3000/users/2fe50d3a-bf6c-4283-a4b9-a49b628f21c3/restaurants/';
+  user_path = 'https://csm43-be.herokuapp.com/users/2fe50d3a-bf6c-4283-a4b9-a49b628f21c3/restaurants/';
 
   constructor(private http: HttpClient) { }
 

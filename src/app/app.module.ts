@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 import { httpInterceptorProviders } from './http-interceptors/index'
 
@@ -29,6 +30,7 @@ import { httpInterceptorProviders } from './http-interceptors/index'
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     httpInterceptorProviders,
+    LocalNotifications
   ],
   bootstrap: [AppComponent]
 })

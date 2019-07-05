@@ -21,11 +21,11 @@ export class SignUpPage implements OnInit {
   }
 
   registerUser() {
-    this.user.permissionLevel = 4;
+    this.user.permissionLevel = 1;
     this.credentialService.registerUser(this.user).subscribe(response => {
       this.tokenService.setToken(response.token);
       this.tokenService.setUserId(response.userId);
-      this.navCtrl.navigateForward('/home');
+      this.navCtrl.navigateForward('/reservations-list');
     });
   }
 

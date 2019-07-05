@@ -23,7 +23,7 @@ export class SignInPage implements OnInit {
     this.credentialService.login(this.login).subscribe(response => {
       this.tokenService.setToken(response.token);
       this.tokenService.setUserId(response.userId);
-      this.navCtrl.navigateForward('/home');
+      this.navCtrl.navigateForward('/reservations-list');
     });
   }
 

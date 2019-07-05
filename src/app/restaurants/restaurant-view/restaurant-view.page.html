@@ -19,7 +19,17 @@
       <ion-label>Endereço: {{restaurant.localization}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Mesas: {{restaurant.tables}}</ion-label>
+      <ion-label>Mesas Totais: {{restaurant.tables}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Mesas Disponiveis: {{restaurant.tomorrowAvailableTables}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Selecionar Mesas</ion-label>
+      <ion-select [(ngModel)]="tableReservation" okText="Ok" cancelText="Cancelar" interface="popover">
+        <ion-select-option *ngFor="let table of tableOptions">{{table}}</ion-select-option>        
+      </ion-select>
     </ion-item>
   </ion-list>
+  <ion-button (click)="createReservation()">Fazer Reserva</ion-button>
 </ion-content>

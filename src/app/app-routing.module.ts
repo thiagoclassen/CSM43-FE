@@ -9,10 +9,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    loadChildren: './home/home.module#HomePageModule'
-  },
-  {
     path: 'list',
     loadChildren: './list/list.module#ListPageModule'
   },
@@ -36,6 +32,14 @@ const routes: Routes = [
   {
     path: 'restaurant/:id',
     loadChildren: './restaurants/restaurant-view/restaurant-view.module#RestaurantViewPageModule'
+  },
+  {
+    path: 'reservations-list',
+    loadChildren: './reservations/reservations-list/reservations-list.module#ReservationsListPageModule'
+  },
+  {
+    path: 'reservation/:restaurantId/:reservationId',
+    loadChildren: './reservations/reservation-view/reservation-view.module#ReservationViewPageModule'
   }
 ];
 

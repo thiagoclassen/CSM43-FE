@@ -14,33 +14,36 @@ export class StarterCourseService {
 
 	constructor(private http: HttpClient, private tokenService: TokenService) { }
 
-	listStarterCourses(): Observable<any[]> {
-
-		let url = this.path + 'users/:userId/restaurants/:restaurantId/starterCourses';
-
+	listStarterCourses(restaurantId): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `users/${userId}/restaurants/${restaurantId}/starterCourses`;
 		return this.http.get<any>(url);
 
 	}
 
-	getStarterCourse(starterCourseId): Observable<any[]> {
-
-		let url = this.path + 'users/:userId/restaurants/:restaurantId/starterCourses/:starterCourseId';
-
+	getStarterCourse(restaurantId, starterCourseId): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `users/${userId}/restaurants/${restaurantId}/starterCourses/${starterCourseId}`;
 		return this.http.get<any>(url);
 
 	}
 
-	createStarterCourse(course): Observable<any[]> {
-		let url = this.path + 'users/:userId/restaurants/:restaurantId/starterCourses';
+	createStarterCourse(restaurantId, course): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `users/${userId}/restaurants/${restaurantId}/starterCourses`;
 		return this.http.post<any>(url, course);
 	}
 
-	removeStarterCourse(courseId): Observable<any[]> {
+	patchStarterCourse(restaurantId, course): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `users/${userId}/restaurants/${restaurantId}/starterCourses/${course.id}`;
+		return this.http.patch<any>(url, course);
+	}
 
-		let url = '/users/:userId/restaurants/:restaurantId/starterCourses/:starterCourseId';
-
+	removeStarterCourse(restaurantId, courseId): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `users/${userId}/restaurants/${restaurantId}/starterCourses/${courseId}`;
 		return this.http.delete<any>(url);
-
 	}
 
 }

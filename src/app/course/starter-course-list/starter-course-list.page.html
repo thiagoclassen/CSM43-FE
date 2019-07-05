@@ -1,9 +1,20 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>starterCourse-list</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>Lista de Entradas</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+	<ion-button [hidden]="!isEmployee" routerLink="/restaurant/{{restaurantId}}/starter-course-form">Criar Entrada
+	</ion-button>
+	<ion-list>
+		<ion-item *ngFor="let starterCourse of starterCourseList">
+			<div class="item-note" routerLink="/restaurant/{{restaurantId}}/starter-course/{{starterCourse.id}}">
+				{{starterCourse.name}}
+			</div>
+		</ion-item>
+	</ion-list>
 </ion-content>

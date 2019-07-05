@@ -7,20 +7,24 @@ import { IonicModule } from '@ionic/angular';
 
 import { StarterCourseListPage } from './starter-course-list.page';
 
+import { RestaurantsService } from '../../restaurants/restaurants.service';
+import { TokenService } from '../../guard/token.service';
+
 const routes: Routes = [
-  {
-    path: '',
-    component: StarterCourseListPage
-  }
+	{
+		path: '',
+		component: StarterCourseListPage
+	}
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [StarterCourseListPage]
+	imports: [
+		CommonModule,
+		FormsModule,
+		IonicModule,
+		RouterModule.forChild(routes)
+	],
+	declarations: [StarterCourseListPage],
+	providers: [RestaurantsService, TokenService]
 })
-export class StarterCourseListPageModule {}
+export class StarterCourseListPageModule { }

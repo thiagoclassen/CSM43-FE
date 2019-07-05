@@ -11,6 +11,9 @@ import { Restaurant } from '../restaurant';
 export class RestaurantViewPage implements OnInit {
 
   private restaurant: Restaurant;
+  private tableOptions: number[];
+  private tableReservation: number;
+  private restaurantId: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,8 +22,22 @@ export class RestaurantViewPage implements OnInit {
 
   ngOnInit() {
     this.restaurant = new Restaurant();
-    let id = this.route.snapshot.paramMap.get('id');    
-    this.restaurantsService.getRestautant(id).subscribe(response => this.restaurant = response);
+    this.tableOptions = [];
+    this.restaurantId = this.route.snapshot.paramMap.get('id');
+    this.restaurantsService.getRestautant(this.restaurantId).subscribe(response => {
+      this.restaurant = response;
+      this.loadTableOptions();
+    });
+  }
+
+  loadTableOptions() {
+    for (let idx = 1; idx <= this.restaurant.tomorrowAvailableTables; idx++) {
+      this.tableOptions.push(idx);
+    }
+  }
+
+  createReservation() {
+    this.restaurantsService.createReservation(this.restaurantId, this.tableReservation).subscribe(response => console.log(response));
   }
 
 }

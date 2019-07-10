@@ -16,5 +16,8 @@
 				{{starterCourse.name}}
 			</div>
 		</ion-item>
+		<ion-item *ngIf="starterCourseList.length <= 0 || !starterCourseList">
+			Nenhuma entrada disponível.
+		</ion-item>
 	</ion-list>
 </ion-content>

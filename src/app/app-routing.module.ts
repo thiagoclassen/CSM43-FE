@@ -52,6 +52,18 @@ const routes: Routes = [
   {
     path: 'restaurant/:restaurantId/starter-course-form',
     loadChildren: './course/starter-course-form/starter-course-form.module#StarterCourseFormPageModule'
+  }, 
+  {
+    path: 'restaurant/:restaurantId/main-course/:id',
+    loadChildren: './course/main-course-view/main-course-view.module#MainCourseViewPageModule'
+  },
+  {
+    path: 'restaurant/:restaurantId/main-courses',
+    loadChildren: './course/main-course-list/main-course-list.module#MainCourseListPageModule'
+  },
+  {
+    path: 'restaurant/:restaurantId/main-course-form',
+    loadChildren: './course/main-course-form/main-course-form.module#MainCourseFormPageModule'
   },
   {
     path: 'my-restaurant',

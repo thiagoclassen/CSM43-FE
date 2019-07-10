@@ -1,0 +1,29 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title [hidden]="dessertIdEdit">Criar Sobremesa</ion-title>
+		<ion-title [hidden]="!dessertIdEdit">Editar Sobremesa</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [hidden]="dessertIdEdit">
+	<ion-input [(ngModel)]="dessert.name" placeholder="Nome"></ion-input>
+	<ion-input [(ngModel)]="dessert.description" placeholder="Descrição"></ion-input>
+	<ion-input [(ngModel)]="dessert.photo" placeholder="Photo"></ion-input>
+	<ion-button (click)="registerDessert()" color="primary">Registrar</ion-button>
+</ion-content>
+
+<ion-content [hidden]="!dessertIdEdit">
+	<ion-input [ngModel]="dessertEdit?.name" (ngModelChange)="dessertEdit?.name ? dessertEdit.name = $event : null"
+		placeholder="Nome">
+	</ion-input>
+	<ion-input [ngModel]="dessertEdit?.description"
+		(ngModelChange)="dessertEdit?.description ? dessertEdit.description = $event : null" placeholder="Description">
+	</ion-input>
+	<ion-input [ngModel]="dessertEdit?.photo" (ngModelChange)="dessertEdit?.photo ? dessertEdit.photo = $event : null"
+		placeholder="Photo">
+	</ion-input>
+	<ion-button (click)="editDessert()" color="primary">Editar</ion-button>
+</ion-content>

@@ -1,43 +1,45 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { TokenService } from '../guard/token.service';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class DessertService {
 
-  constructor(private http: HttpClient) { }
+	path = 'https://csm43-be.herokuapp.com';
 
-  listDesserts() {
+	constructor(private http: HttpClient, private tokenService: TokenService) { }
 
-    let url = '/users/:userId/restaurants/:restaurantId/desserts';
+	listDesserts(retaurantId): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `/users/${userId}/restaurants/${retaurantId}/desserts`;
+		return this.http.get<any>(url);
+	}
 
-    return this.http.get(url);
+	getDessert(restaurantId, dessertId): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `/users/${userId}/restaurants/${restaurantId}/desserts/${dessertId}`;
+		return this.http.get<any>(url);
+	}
 
-  }
+	createDessert(restaurantId, dessert): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `/users/${userId}/restaurants/${restaurantId}/desserts`;
+		return this.http.post<any>(url, dessert);
+	}
 
-  getDessert() {
+	patchDessert(restaurantId, dessert): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `/users/${userId}/restaurants/${restaurantId}/desserts/${dessert.id}`;
+		return this.http.patch<any>(url, dessert);
+	}
 
-    let url = '/users/:userId/restaurants/:restaurantId/desserts/:dessertId';
-
-    return this.http.get(url);
-
-  }
-
-  createDessert(dessert) {
-
-    let url = '/users/:userId/restaurants/:restaurantId/desserts';
-
-    return this.http.post(url, dessert);
-
-  }
-
-  removeDessert() {
-
-    let url = '/users/:userId/restaurants/:restaurantId/desserts/:dessertId';
-
-    return this.http.delete(url);
-
-  }
+	removeDessert(restaurantId, dessertId): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `/users/${userId}/restaurants/${restaurantId}/desserts/${dessertId}`;
+		return this.http.delete<any>(url);
+	}
 
 }

@@ -1,0 +1,23 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>Lista de Sobremesa</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-button [hidden]="!isEmployee" routerLink="/restaurant/{{restaurantId}}/dessert-form">Criar Sobremesa
+	</ion-button>
+	<ion-list>
+		<ion-item *ngFor="let dessert of dessertList">
+			<div class="item-note" routerLink="/restaurant/{{restaurantId}}/dessert/{{dessert.id}}">
+				{{dessert.name}}
+			</div>
+		</ion-item>
+		<ion-item *ngIf="dessertList.length <= 0 || !dessertList">
+			Nenhuma sobremesa disponível.
+		</ion-item>
+	</ion-list>
+</ion-content>

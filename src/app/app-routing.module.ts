@@ -52,7 +52,7 @@ const routes: Routes = [
   {
     path: 'restaurant/:restaurantId/starter-course-form',
     loadChildren: './course/starter-course-form/starter-course-form.module#StarterCourseFormPageModule'
-  }, 
+  },
   {
     path: 'restaurant/:restaurantId/main-course/:id',
     loadChildren: './course/main-course-view/main-course-view.module#MainCourseViewPageModule'
@@ -72,7 +72,11 @@ const routes: Routes = [
   {
     path: 'employee/:restaurantId',
     loadChildren: './restaurants/employee/employee.module#EmployeePageModule'
-  }
+  },
+  { path: 'restaurant/:restaurantId/dessert/:id', loadChildren: './course/dessert-view/dessert-view.module#DessertViewPageModule' },
+  { path: 'restaurant/:restaurantId/dessert-form', loadChildren: './course/dessert-form/dessert-form.module#DessertFormPageModule' },
+  { path: 'restaurant/:restaurantId/desserts', loadChildren: './course/dessert-list/dessert-list.module#DessertListPageModule' }
+
 ];
 
 @NgModule({

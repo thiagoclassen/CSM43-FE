@@ -1,43 +1,54 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { TokenService } from '../guard/token.service';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class MainCourseService {
 
-  constructor(private http: HttpClient) { }
+	path = 'https://csm43-be.herokuapp.com';
 
-  listMainCourses() {
+	constructor(private http: HttpClient, private tokenService: TokenService) { }
 
-    let url = '/users/:userId/restaurants/:restaurantId/mainCourses';
+	listMainCourses(retaurantId): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `/users/${userId}/restaurants/${retaurantId}/mainCourses`;
+		console.log('HELLOOO', url);
+		return this.http.get<any>(url);
 
-    return this.http.get(url);
+	}
 
-  }
+	getMainCourse(restaurantId, mainCourseId): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `/users/${userId}/restaurants/${restaurantId}/mainCourses/${mainCourseId}`;
+		console.log('HOOO', url)
+		return this.http.get<any>(url);
 
-  getMainCourse() {
+	}
 
-    let url = '/users/:userId/restaurants/:restaurantId/mainCourses/:mainCourseId';
+	createMainCourse(restaurantId, course): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `/users/${userId}/restaurants/${restaurantId}/mainCourses`;
 
-    return this.http.get(url);
+		return this.http.post<any>(url, course);
 
-  }
+	}
 
-  createMainCourse(course) {
+	patchMainCourse(restaurantId, course): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `/users/${userId}/restaurants/${restaurantId}/mainCourses/${course.id}`;
 
-    let url = '/users/:userId/restaurants/:restaurantId/mainCourses';
+		return this.http.patch<any>(url, course);
+	}
 
-    return this.http.post(url, course);
+	removeMainCourse(restaurantId, mainCourseId): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `/users/${userId}/restaurants/${restaurantId}/mainCourses/${mainCourseId}`;
 
-  }
+		return this.http.delete<any>(url);
 
-  removeMainCourse(courseId) {
-
-    let url = '/users/:userId/restaurants/:restaurantId/mainCourses/:mainCourseId';
-
-    return this.http.delete(url);
-
-  }
+	}
 
 }

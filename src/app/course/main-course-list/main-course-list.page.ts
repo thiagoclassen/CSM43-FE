@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { StarterCourseService } from '../starter.service';
+import { MainCourseService } from '../main.service';
 import { RestaurantsService } from '../../restaurants/restaurants.service';
 import { TokenService } from '../../guard/token.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-	selector: 'app-starter-course-list',
-	templateUrl: './starter-course-list.page.html',
-	styleUrls: ['./starter-course-list.page.scss'],
+  selector: 'app-main-course-list',
+  templateUrl: './main-course-list.page.html',
+  styleUrls: ['./main-course-list.page.scss'],
 })
-export class StarterCourseListPage implements OnInit {
+export class MainCourseListPage implements OnInit {
 	private restaurantId = null;
 	private restaurant = null;
-	private starterCourseList = [];
+	private mainCourseList = [];
 	private isEmployee = false;
 	constructor(
 		private route: ActivatedRoute,
-		private starterCourseService: StarterCourseService,
+		private mainCourseService: MainCourseService,
 		private restaurantService: RestaurantsService,
 		private tokenService: TokenService) { }
 
@@ -29,9 +29,9 @@ export class StarterCourseListPage implements OnInit {
 					this.verifyEmployeeUser();
 				}
 			});
-		this.starterCourseService.listStarterCourses(this.restaurantId)
-			.subscribe(starterCourseListResponse => {
-				this.starterCourseList = starterCourseListResponse;
+		this.mainCourseService.listMainCourses(this.restaurantId)
+			.subscribe(mainCourseListResponse => {
+				this.mainCourseList = mainCourseListResponse;
 			});
 	}
 
@@ -43,4 +43,5 @@ export class StarterCourseListPage implements OnInit {
 			}
 		});
 	}
+
 }

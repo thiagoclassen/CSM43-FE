@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MainCourseService } from '../main.service';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { OverlayService } from 'src/app/common/services/overlay.service';
 
 @Component({
 	selector: 'app-main-course-form',
@@ -15,14 +17,17 @@ export class MainCourseFormPage implements OnInit {
 
 	constructor(
 		private route: ActivatedRoute,
-		private mainCourseService: MainCourseService) {
+		private location: Location,
+		private mainCourseService: MainCourseService,
+		private overlayService: OverlayService) {
 		this.mainCourse = {
 			name: '',
 			description: '',
 			photo: ''
 		};
 	}
-	ngOnInit() {
+	async ngOnInit() {
+		let loading = await this.overlayService.loading();
 		this.restaurantId = this.route.snapshot.paramMap.get('restaurantId');
 		this.mainCourseIdEdit = this.route.snapshot.queryParamMap.get('editId');
 		if (this.mainCourseIdEdit) {
@@ -31,21 +36,31 @@ export class MainCourseFormPage implements OnInit {
 				.subscribe(mainCourseResponse => {
 					this.mainCourseEdit = mainCourseResponse;
 					console.log(this.mainCourseEdit);
+					loading.dismiss();
 				});
 
 		}
+		loading.dismiss();
 	}
 
-	registerMainCourse(mainCourse: any) {
+	async registerMainCourse(mainCourse: any) {
+		let loading = await this.overlayService.loading();
 		this.mainCourseService
 			.createMainCourse(this.restaurantId, this.mainCourse)
-			.subscribe(response => console.log(response));
+			.subscribe(() => {
+				this.location.back();
+				loading.dismiss();
+			});
 	}
 
-	editMainCourse() {
+	async editMainCourse() {
+		let loading = await this.overlayService.loading();
 		this.mainCourseService
 			.patchMainCourse(this.restaurantId, this.mainCourseEdit)
-			.subscribe(response => console.log(response));
+			.subscribe(() => {
+				this.location.back();
+				loading.dismiss();
+			});
 	}
 
 }

@@ -37,7 +37,6 @@ export class RestaurantRatingsPage {
 			.subscribe(ratingResponse => {
 				this.ratingList = ratingResponse;
 				this.globalAvg = this.ratingService.avgRatings(this.ratingList);
-				console.log('HIIIIIII', this.globalAvg);
 			});
 		this.ratingService.getUserRatingByRestaurantId(this.restaurantId)
 			.subscribe(userRating => {

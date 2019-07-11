@@ -3,14 +3,17 @@
 		<ion-buttons slot="start">
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
-		<ion-title>restaurant-ratings</ion-title>
+		<ion-title>Avaliações do {{restaurant.name}}</ion-title>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content>
+	<p>Média das Avaliações:</p>
 	<rating [(ngModel)]="globalAvg" readonly="true" size="default">
 	</rating>
 
+
+	<p>Sua Avaliação:</p>
 	<rating [(ngModel)]="rating.value" readonly="false" size="default" (ngModelChange)="registerRating($event)">
 	</rating>
 </ion-content>

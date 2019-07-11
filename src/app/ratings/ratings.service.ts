@@ -19,12 +19,11 @@ export class RatingsService {
 	}
 
 	avgRatings(ratings) {
-		console.log('AVGRATINGS');
 		let sumRatings = 0;
 		ratings.forEach(rating => {
 			sumRatings += rating.value;
 		});
-		return (sumRatings / ratings.lenght);
+		return (sumRatings / ratings.length);
 	}
 
 	getUserRatingByRestaurantId(restaurantId): Observable<any[]> {

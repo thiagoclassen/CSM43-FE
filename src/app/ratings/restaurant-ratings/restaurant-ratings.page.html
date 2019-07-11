@@ -1,0 +1,16 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>restaurant-ratings</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<rating [(ngModel)]="globalAvg" readonly="true" size="default">
+	</rating>
+
+	<rating [(ngModel)]="rating.value" readonly="false" size="default" (ngModelChange)="registerRating($event)">
+	</rating>
+</ion-content>

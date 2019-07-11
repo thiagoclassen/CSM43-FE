@@ -47,8 +47,10 @@ export class AppComponent {
 
 	initializeApp() {
 		this.platform.ready().then(() => {
-			this.statusBar.overlaysWebView(false);
-			this.splashScreen.hide();
+			if (this.platform.is('mobile')) {
+				this.statusBar.overlaysWebView(false);
+				this.splashScreen.hide();
+			}
 		});
 	}
 }

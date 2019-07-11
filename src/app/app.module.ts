@@ -4,7 +4,6 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,8 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-
-import { httpInterceptorProviders } from './http-interceptors/index'
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { httpInterceptorProviders } from './http-interceptors/index';
+import { IonicRatingModule } from 'ionic4-rating';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,14 +23,15 @@ import { httpInterceptorProviders } from './http-interceptors/index'
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+	HttpClientModule,
+	IonicRatingModule
   ],
   providers: [
-    StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     httpInterceptorProviders,
-    LocalNotifications
+    LocalNotifications,
+    StatusBar
   ],
   bootstrap: [AppComponent]
 })

@@ -44,7 +44,7 @@ export class RestaurantRatingsPage {
 					this.updateRating = true;
 				}
 				this.userRating = userRating;
-				this.rating.value = userRating['value'];
+				this.rating.value = userRating ? userRating['value'] : 0;
 				loading.dismiss();
 			});
 	}

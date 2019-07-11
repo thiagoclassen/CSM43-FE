@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StarterCourseService } from '../starter.service';
 import { ActivatedRoute } from '@angular/router';
+import { OverlayService } from 'src/app/common/services/overlay.service';
+import { Location } from '@angular/common';
 
 @Component({
 	selector: 'app-starter-course-form',
@@ -15,7 +17,9 @@ export class StarterCourseFormPage implements OnInit {
 
 	constructor(
 		private route: ActivatedRoute,
-		private starterCourseService: StarterCourseService) {
+		private location: Location,
+		private starterCourseService: StarterCourseService,
+		private overlayService: OverlayService) {
 		this.starterCourse = {
 			name: '',
 			description: '',
@@ -23,7 +27,9 @@ export class StarterCourseFormPage implements OnInit {
 		};
 		console.log(this.starterCourse);
 	}
-	ngOnInit() {
+
+	async ngOnInit() {
+		let loading = await this.overlayService.loading();
 		this.restaurantId = this.route.snapshot.paramMap.get('restaurantId');
 		this.startCourseIdEdit = this.route.snapshot.queryParamMap.get('editId');
 		if (this.startCourseIdEdit) {
@@ -31,21 +37,31 @@ export class StarterCourseFormPage implements OnInit {
 				.getStarterCourse(this.restaurantId, this.startCourseIdEdit)
 				.subscribe(startCourseResponse => {
 					this.startCourseEdit = startCourseResponse;
+					loading.dismiss();
 				});
-
 		}
+		loading.dismiss();
+
 	}
 
-	registerStarterCourse(starterCourse: any) {
+	async registerStarterCourse(starterCourse: any) {
+		let loading = await this.overlayService.loading();
 		this.starterCourseService
 			.createStarterCourse(this.restaurantId, this.starterCourse)
-			.subscribe(response => console.log(response));
+			.subscribe(() => {
+				this.location.back();
+				loading.dismiss();
+			});
 	}
 
-	editStarterCourse() {
+	async editStarterCourse() {
+		let loading = await this.overlayService.loading();
 		this.starterCourseService
 			.patchStarterCourse(this.restaurantId, this.startCourseEdit)
-			.subscribe(response => console.log(response));
+			.subscribe(() => {
+				this.location.back();
+				loading.dismiss();
+			});
 	}
 
 }

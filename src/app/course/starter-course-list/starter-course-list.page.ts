@@ -3,13 +3,14 @@ import { StarterCourseService } from '../starter.service';
 import { RestaurantsService } from '../../restaurants/restaurants.service';
 import { TokenService } from '../../guard/token.service';
 import { ActivatedRoute } from '@angular/router';
+import { OverlayService } from 'src/app/common/services/overlay.service';
 
 @Component({
 	selector: 'app-starter-course-list',
 	templateUrl: './starter-course-list.page.html',
 	styleUrls: ['./starter-course-list.page.scss'],
 })
-export class StarterCourseListPage implements OnInit {
+export class StarterCourseListPage{
 	private restaurantId = null;
 	private restaurant = null;
 	private starterCourseList = [];
@@ -18,9 +19,11 @@ export class StarterCourseListPage implements OnInit {
 		private route: ActivatedRoute,
 		private starterCourseService: StarterCourseService,
 		private restaurantService: RestaurantsService,
-		private tokenService: TokenService) { }
+		private tokenService: TokenService,
+		private overlayService: OverlayService) { }
 
-	ngOnInit() {
+	async ionViewWillEnter() {
+		let loading = await this.overlayService.loading();
 		this.restaurantId = this.route.snapshot.paramMap.get('restaurantId');
 		this.restaurantService.getRestautant(this.restaurantId)
 			.subscribe(restaurantResponse => {
@@ -32,6 +35,7 @@ export class StarterCourseListPage implements OnInit {
 		this.starterCourseService.listStarterCourses(this.restaurantId)
 			.subscribe(starterCourseListResponse => {
 				this.starterCourseList = starterCourseListResponse;
+				loading.dismiss();
 			});
 	}
 

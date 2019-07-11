@@ -47,7 +47,7 @@ export class DessertViewPage {
 	async deleteDessert(dessertId) {
 		let loading = await this.overlayService.loading();
 		this.dessertService.removeDessert(this.restaurantId, dessertId)
-			.subscribe(response => {
+			.subscribe(() => {
 				this.location.back();
 				loading.dismiss();
 			});

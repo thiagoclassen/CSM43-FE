@@ -4,13 +4,15 @@ import { StarterCourseService } from '../starter.service';
 import { TokenService } from '../../guard/token.service';
 import { RestaurantsService } from '../../restaurants/restaurants.service';
 import { ActivatedRoute } from '@angular/router';
+import { OverlayService } from 'src/app/common/services/overlay.service';
+import { Location } from '@angular/common';
 
 @Component({
 	selector: 'app-starter-course-view',
 	templateUrl: './starter-course-view.page.html',
 	styleUrls: ['./starter-course-view.page.scss'],
 })
-export class StarterCourseViewPage implements OnInit {
+export class StarterCourseViewPage {
 	private starterCourseId = null;
 	private restaurantId = null;
 	private starterCourse = null;
@@ -20,9 +22,12 @@ export class StarterCourseViewPage implements OnInit {
 		private route: ActivatedRoute,
 		private starterCourseService: StarterCourseService,
 		private tokenService: TokenService,
-		private restaurantService: RestaurantsService) { }
+		private location: Location,
+		private restaurantService: RestaurantsService,
+		private overlayService: OverlayService) { }
 
-	ngOnInit() {
+	async ionViewWillEnter() {
+		let loading = await this.overlayService.loading();
 		this.restaurantId = this.route.snapshot.paramMap.get('restaurantId');
 		this.starterCourseId = this.route.snapshot.paramMap.get('id');
 		this.restaurantService.getRestautant(this.restaurantId)
@@ -35,11 +40,16 @@ export class StarterCourseViewPage implements OnInit {
 		this.starterCourseService.getStarterCourse(this.restaurantId, this.starterCourseId)
 			.subscribe(starterCourseResponse => {
 				this.starterCourse = starterCourseResponse;
+				loading.dismiss();
 			});
 	}
 
-	deleteStarterCourse(starterCourseId) {
-		this.starterCourseService.removeStarterCourse(this.restaurantId, starterCourseId).subscribe(response => console.log(response));
+	async deleteStarterCourse(starterCourseId) {
+		let loading = await this.overlayService.loading();
+		this.starterCourseService.removeStarterCourse(this.restaurantId, starterCourseId).subscribe(() => {
+			this.location.back();
+			loading.dismiss();
+		});
 	}
 	verifyEmployeeUser() {
 		let userIdLogin = this.tokenService.getUserId();

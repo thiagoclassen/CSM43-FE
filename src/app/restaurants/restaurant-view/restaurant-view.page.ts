@@ -39,12 +39,6 @@ export class RestaurantViewPage implements OnInit {
       this.loadTableOptions();
       this.verifyEmployeeUser();
     });
-
-
-    //this.restaurantsService.getReservationList(this.restaurantId).subscribe(response => this.reservationsList = response);
-
-    //this.setNotification();
-
   }
 
   loadTableOptions() {
@@ -54,11 +48,12 @@ export class RestaurantViewPage implements OnInit {
   }
 
   verifyEmployeeUser() {
-    let userIdLogin = this.tokenService.getUserId();
+    const userIdLogin = this.tokenService.getUserId();
     this.restaurant.employees.forEach(employee => {
       if (userIdLogin === employee.id) {
         this.isEmployee = true;
-        this.restaurantsService.getReservationList(this.restaurantId).subscribe(response => { this.reservationsList = response; console.log(this.reservationsList) });
+        this.restaurantsService.getReservationList(this.restaurantId)
+          .subscribe(response => this.reservationsList = response);
       }
     });
   }
@@ -78,25 +73,21 @@ export class RestaurantViewPage implements OnInit {
   }
 
   contactNumber() {
-    this.callNumber.callNumber("18001010101", true)
+    this.callNumber.callNumber('18001010101', true)
       .then(res => console.log('Launched dialer!', res))
       .catch(err => console.log('Error launching dialer', err));
   }
 
   contactEmail() {
-    this.emailComposer.isAvailable().then((available: boolean) => {
-      if (available) {
-        let email = {
-          to: 'restaurante@gmail.com',
-          subject: 'Contato',
-          body: 'teste',
-          isHtml: true
-        }
+    const email = {
+      to: 'restaurante@gmail.com',
+      subject: 'Contato',
+      body: 'teste',
+      isHtml: true
+    };
 
-        // Send a text message using default options
-        this.emailComposer.open(email);
-      }
-    });
+    // Send a text message using default options
+    this.emailComposer.open(email);
 
 
   }

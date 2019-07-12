@@ -12,6 +12,7 @@
 	<ion-input [(ngModel)]="dessert.name" placeholder="Nome"></ion-input>
 	<ion-input [(ngModel)]="dessert.description" placeholder="Descrição"></ion-input>
 	<ion-input [(ngModel)]="dessert.photo" placeholder="Photo"></ion-input>
+	<img  [src]="dessert.photo" alt="Select Image"/>
 	<ion-button (click)="registerDessert()" color="primary">Registrar</ion-button>
 	<ion-button (click)="takePicture()" color="primary">Foto</ion-button>
 </ion-content>

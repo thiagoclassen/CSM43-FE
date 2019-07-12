@@ -78,6 +78,7 @@ export class DessertFormPage implements OnInit {
 			// If it's base64 (DATA_URL):
 			let base64Image = 'data:image/jpeg;base64,' + imageData;
 			console.log("fotooo", base64Image);
+			this.dessert.photo = base64Image;
 		}, (err) => {
 			// Handle error
 		});

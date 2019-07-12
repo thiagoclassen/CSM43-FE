@@ -16,7 +16,9 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { httpInterceptorProviders } from './http-interceptors/index';
 import { IonicRatingModule } from 'ionic4-rating';
-import {DatePipe} from '@angular/common';
+import { DatePipe } from '@angular/common';
+
+import { Camera } from '@ionic-native/camera/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,8 +28,8 @@ import {DatePipe} from '@angular/common';
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
-	HttpClientModule,
-	IonicRatingModule
+    HttpClientModule,
+    IonicRatingModule
   ],
   providers: [
     SplashScreen,
@@ -37,8 +39,9 @@ import {DatePipe} from '@angular/common';
     StatusBar,
     DatePipe,
     CallNumber,
-    EmailComposer
+    EmailComposer,
+    Camera,
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

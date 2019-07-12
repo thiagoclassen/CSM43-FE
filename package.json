@@ -21,6 +21,7 @@
         "@angular/platform-browser-dynamic": "^7.2.2",
         "@angular/router": "^7.2.2",
         "@ionic-native/call-number": "^5.9.0",
+        "@ionic-native/camera": "^5.9.0",
         "@ionic-native/core": "^5.0.0",
         "@ionic-native/email-composer": "^5.9.0",
         "@ionic-native/local-notifications": "^5.9.0",
@@ -89,7 +90,8 @@
             "cordova-plugin-local-notification": {},
             "cordova-plugin-statusbar": {},
             "mx.ferreyra.callnumber": {},
-            "cordova-plugin-email-composer": {}
+            "cordova-plugin-email-composer": {},
+            "cordova-plugin-camera": {}
         },
         "platforms": [
             "android",

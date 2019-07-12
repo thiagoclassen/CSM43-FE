@@ -13,6 +13,7 @@
 	<ion-input [(ngModel)]="dessert.description" placeholder="Descrição"></ion-input>
 	<ion-input [(ngModel)]="dessert.photo" placeholder="Photo"></ion-input>
 	<ion-button (click)="registerDessert()" color="primary">Registrar</ion-button>
+	<ion-button (click)="takePicture()" color="primary">Foto</ion-button>
 </ion-content>
 
 <ion-content [hidden]="!dessertIdEdit">
@@ -26,4 +27,5 @@
 		placeholder="Photo">
 	</ion-input>
 	<ion-button (click)="editDessert()" color="primary">Editar</ion-button>
+	<ion-button (click)="takePicture()" color="primary">Foto</ion-button>
 </ion-content>

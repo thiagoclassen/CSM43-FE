@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { SERVER } from '../env/server';
 import { Restaurant } from './restaurant';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,8 @@ export class RestaurantsService {
 
   employee_path = SERVER + '/users/:userId/restaurants/:restaurantId/employees';
 
-  constructor(private http: HttpClient, private localNotification: LocalNotifications) { }
+
+  constructor(private http: HttpClient, private localNotification: LocalNotifications, private datePipe: DatePipe) { }
 
   listRestaurants(): Observable<any[]> {
     return this.http.get<any[]>(this.restaurants_path);
@@ -42,8 +44,14 @@ export class RestaurantsService {
     const reservation = { tables, date: this.tomorrowDate() };
 
     this.setNotification();
+    console.log(reservation);
 
     return this.http.post(url, reservation);
+  }
+
+  getReservationList(restaurantId: string): Observable<any[]> {
+    let url = this.reservations_path.replace(':restaurantId', restaurantId);
+    return this.http.get<any[]>(url);
   }
 
   setNotification() {
@@ -85,6 +93,4 @@ export class RestaurantsService {
     tomorrow.setDate(today.getDate() + 1);
     return tomorrow;
   }
-
-
 }

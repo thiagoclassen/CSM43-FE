@@ -37,4 +37,15 @@
 	<ion-button [routerLink]="['/restaurant', restaurant.id, 'desserts']">Sobremesas</ion-button>
 	<ion-button [routerLink]="['/restaurant', restaurant.id, 'complete-courses']">Pratos Completos</ion-button>
 	<ion-button [routerLink]="['/restaurant', restaurant.id, 'ratings']">Avaliações</ion-button>
+	<ion-list [hidden]="!isEmployee">
+		Reservas:
+		<ion-item *ngFor="let reservation of reservationsList">
+			<div class="item-note">
+				{{reservation.user.name}} - Mesas: {{reservation.tables}}
+			</div>
+		</ion-item>
+		<ion-item *ngIf="reservationsList.length <= 0 || !reservationsList">
+			Nenhuma reserva disponível.
+		</ion-item>
+	</ion-list>
 </ion-content>

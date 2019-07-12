@@ -4,6 +4,8 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -33,7 +35,9 @@ import {DatePipe} from '@angular/common';
     httpInterceptorProviders,
     LocalNotifications,
     StatusBar,
-    DatePipe
+    DatePipe,
+    CallNumber,
+    EmailComposer
   ],
   bootstrap: [AppComponent]
 })

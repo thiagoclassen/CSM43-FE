@@ -4,6 +4,8 @@ import { RestaurantsService } from '../restaurants.service';
 import { Restaurant } from '../restaurant';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { TokenService } from '../../guard/token.service';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 @Component({
   selector: 'app-restaurant-view',
@@ -23,7 +25,9 @@ export class RestaurantViewPage implements OnInit {
     private route: ActivatedRoute,
     private restaurantsService: RestaurantsService,
     private localNotifications: LocalNotifications,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private callNumber: CallNumber,
+    private emailComposer: EmailComposer
   ) { }
 
   ngOnInit() {
@@ -35,7 +39,7 @@ export class RestaurantViewPage implements OnInit {
       this.loadTableOptions();
       this.verifyEmployeeUser();
     });
-    
+
 
     //this.restaurantsService.getReservationList(this.restaurantId).subscribe(response => this.reservationsList = response);
 
@@ -50,14 +54,14 @@ export class RestaurantViewPage implements OnInit {
   }
 
   verifyEmployeeUser() {
-		let userIdLogin = this.tokenService.getUserId();
-		this.restaurant.employees.forEach(employee => {
-			if (userIdLogin === employee.id) {
+    let userIdLogin = this.tokenService.getUserId();
+    this.restaurant.employees.forEach(employee => {
+      if (userIdLogin === employee.id) {
         this.isEmployee = true;
-        this.restaurantsService.getReservationList(this.restaurantId).subscribe(response => {this.reservationsList = response; console.log(this.reservationsList)});
-			}
-		});
-	}
+        this.restaurantsService.getReservationList(this.restaurantId).subscribe(response => { this.reservationsList = response; console.log(this.reservationsList) });
+      }
+    });
+  }
 
   createReservation() {
     this.restaurantsService.createReservation(this.restaurantId, this.tableReservation).subscribe(response => console.log(response));
@@ -71,6 +75,30 @@ export class RestaurantViewPage implements OnInit {
       text: 'Multi ILocalNotification 2',
       icon: 'http://example.com/icon.png'
     }]);
+  }
+
+  contactNumber() {
+    this.callNumber.callNumber("18001010101", true)
+      .then(res => console.log('Launched dialer!', res))
+      .catch(err => console.log('Error launching dialer', err));
+  }
+
+  contactEmail() {
+    this.emailComposer.isAvailable().then((available: boolean) => {
+      if (available) {
+        let email = {
+          to: 'restaurante@gmail.com',
+          subject: 'Contato',
+          body: 'teste',
+          isHtml: true
+        }
+
+        // Send a text message using default options
+        this.emailComposer.open(email);
+      }
+    });
+
+
   }
 
 }

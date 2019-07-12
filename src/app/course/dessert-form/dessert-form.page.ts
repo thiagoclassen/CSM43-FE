@@ -74,16 +74,10 @@ export class DessertFormPage implements OnInit {
 		}
 
 		this.camera.getPicture(options).then((imageData) => {
-			// imageData is either a base64 encoded string or a file URI
-			// If it's base64 (DATA_URL):
 			let base64Image = 'data:image/jpeg;base64,' + imageData;
-			console.log("fotooo", base64Image);
 			this.dessert.photo = base64Image;
 		}, (err) => {
 			// Handle error
 		});
 	}
-
-
-
 }

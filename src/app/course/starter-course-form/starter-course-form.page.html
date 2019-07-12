@@ -11,8 +11,9 @@
 <ion-content [hidden]="startCourseIdEdit">
 	<ion-input [(ngModel)]="starterCourse.name" placeholder="Nome"></ion-input>
 	<ion-input [(ngModel)]="starterCourse.description" placeholder="Descrição"></ion-input>
-	<ion-input [(ngModel)]="starterCourse.photo" placeholder="Photo"></ion-input>
+	<img  [src]="starterCourse.photo" alt="Select Image"/>
 	<ion-button (click)="registerStarterCourse()" color="primary">Registrar</ion-button>
+	<ion-button (click)="takePicture()" color="primary">Foto</ion-button>
 </ion-content>
 
 <ion-content [hidden]="!startCourseIdEdit">
@@ -27,4 +28,5 @@
 		(ngModelChange)="startCourseEdit?.photo ? startCourseEdit.photo = $event : null" placeholder="Photo">
 	</ion-input>
 	<ion-button (click)="editStarterCourse()" color="primary">Editar</ion-button>
+	<ion-button (click)="takePicture()" color="primary">Foto</ion-button>
 </ion-content>

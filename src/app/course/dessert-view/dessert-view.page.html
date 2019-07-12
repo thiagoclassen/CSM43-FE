@@ -16,7 +16,7 @@
 			<ion-label>Descrição: {{dessert?.description}}</ion-label>
 		</ion-item>
 		<ion-item>
-			<ion-label>Imagem: {{dessert?.photo}}</ion-label>
+				<img  [src]="dessert.photo" alt="Select Image"/>
 		</ion-item>
 	</ion-list>
 	<ion-button [hidden]="!isEmployee" routerLink="/restaurant/{{restaurantId}}/dessert-form"

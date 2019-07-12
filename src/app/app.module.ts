@@ -14,6 +14,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { httpInterceptorProviders } from './http-interceptors/index';
 import { IonicRatingModule } from 'ionic4-rating';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +32,8 @@ import { IonicRatingModule } from 'ionic4-rating';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     httpInterceptorProviders,
     LocalNotifications,
-    StatusBar
+    StatusBar,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

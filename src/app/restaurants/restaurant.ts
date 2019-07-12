@@ -7,6 +7,8 @@ export class Restaurant {
     tables: number;
     tomorrowAvailableTables: number;
     owner: any;
+    phoneNumber: any;
+    employees: any[];
 
     constructor(id: string = null,
         localization?: string,
@@ -14,7 +16,8 @@ export class Restaurant {
         name?: string,
         tables?: number,
         tomorrowAvailableTables?: number,
-        owner?: any) {
+        owner?: any,
+        phoneNumber?: any) {
 
         this.id = id;
         this.localization = localization;
@@ -23,6 +26,7 @@ export class Restaurant {
         this.tables = tables;
         this.tomorrowAvailableTables = tomorrowAvailableTables;
         this.owner = owner;
+        this.phoneNumber = phoneNumber;
     }
 
 }

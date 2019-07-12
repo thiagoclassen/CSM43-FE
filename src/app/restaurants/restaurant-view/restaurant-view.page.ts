@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RestaurantsService } from '../restaurants.service';
 import { Restaurant } from '../restaurant';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { TokenService } from '../../guard/token.service';
 
 @Component({
   selector: 'app-restaurant-view',
@@ -15,11 +16,14 @@ export class RestaurantViewPage implements OnInit {
   private restaurantId: string;
   private tableOptions: number[];
   private tableReservation: number;
+  private reservationsList: any[] = [];
+  private isEmployee = false;
 
   constructor(
     private route: ActivatedRoute,
     private restaurantsService: RestaurantsService,
-    private localNotifications: LocalNotifications
+    private localNotifications: LocalNotifications,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit() {
@@ -29,8 +33,14 @@ export class RestaurantViewPage implements OnInit {
     this.restaurantsService.getRestautant(this.restaurantId).subscribe(response => {
       this.restaurant = response;
       this.loadTableOptions();
+      this.verifyEmployeeUser();
     });
-    this.setNotification();
+    
+
+    //this.restaurantsService.getReservationList(this.restaurantId).subscribe(response => this.reservationsList = response);
+
+    //this.setNotification();
+
   }
 
   loadTableOptions() {
@@ -38,6 +48,16 @@ export class RestaurantViewPage implements OnInit {
       this.tableOptions.push(idx);
     }
   }
+
+  verifyEmployeeUser() {
+		let userIdLogin = this.tokenService.getUserId();
+		this.restaurant.employees.forEach(employee => {
+			if (userIdLogin === employee.id) {
+        this.isEmployee = true;
+        this.restaurantsService.getReservationList(this.restaurantId).subscribe(response => {this.reservationsList = response; console.log(this.reservationsList)});
+			}
+		});
+	}
 
   createReservation() {
     this.restaurantsService.createReservation(this.restaurantId, this.tableReservation).subscribe(response => console.log(response));

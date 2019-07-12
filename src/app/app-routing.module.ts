@@ -76,7 +76,13 @@ const routes: Routes = [
 	{ path: 'restaurant/:restaurantId/dessert/:id', loadChildren: './course/dessert-view/dessert-view.module#DessertViewPageModule' },
 	{ path: 'restaurant/:restaurantId/dessert-form', loadChildren: './course/dessert-form/dessert-form.module#DessertFormPageModule' },
 	{ path: 'restaurant/:restaurantId/desserts', loadChildren: './course/dessert-list/dessert-list.module#DessertListPageModule' },
-	{ path: 'restaurant/:restaurantId/ratings', loadChildren: './ratings/restaurant-ratings/restaurant-ratings.module#RestaurantRatingsPageModule' }
+	{ path: 'restaurant/:restaurantId/ratings', loadChildren: './ratings/restaurant-ratings/restaurant-ratings.module#RestaurantRatingsPageModule' },
+	{ path: 'restaurant/:restaurantId/complete-courses', loadChildren: './course/complete-course-list/complete-course-list.module#CompleteCourseListPageModule' },
+	{ path: 'restaurant/:restaurantId/complete-course/:id', loadChildren: './course/complete-course-view/complete-course-view.module#CompleteCourseViewPageModule' },
+	{ path: 'restaurant/:restaurantId/complete-course-form', loadChildren: './course/complete-course-form/complete-course-form.module#CompleteCourseFormPageModule' }
+
+
+
 
 ];
 

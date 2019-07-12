@@ -1,0 +1,75 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title [hidden]="completeCourseIdEdit">Criar Prato Completo</ion-title>
+		<ion-title [hidden]="!completeCourseIdEdit">Editar Prato Completo</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [hidden]="completeCourseIdEdit">
+	<ion-input [(ngModel)]="completeCourse.name" placeholder="Nome"></ion-input>
+	<ion-input [(ngModel)]="completeCourse.description" placeholder="Descrição"></ion-input>
+	<ion-input [(ngModel)]="completeCourse.photo" placeholder="Photo"></ion-input>
+	<input class="form-control" [(ngModel)]="completeCourse.price" placeholder="Preço" currencyMask >
+	<ion-item>
+		<ion-label>Entrada:</ion-label>
+		<ion-select [(ngModel)]="completeCourse.starterCourse" cancelText="Cancelar">
+			<ion-select-option *ngFor="let starterCourse of starterCourseList" [(value)]="starterCourse.id">
+				{{starterCourse.name}}</ion-select-option>
+		</ion-select>
+	</ion-item>
+	<ion-item>
+		<ion-label>Prato Principal:</ion-label>
+		<ion-select [(ngModel)]="completeCourse.mainCourse" cancelText="Cancelar">
+			<ion-select-option *ngFor="let mainCourse of mainCourseList" [(value)]="mainCourse.id">
+				{{mainCourse.name}}</ion-select-option>
+		</ion-select>
+	</ion-item>
+	<ion-item>
+		<ion-label>Sobremesa:</ion-label>
+		<ion-select [(ngModel)]="completeCourse.dessert" cancelText="Cancelar">
+			<ion-select-option *ngFor="let dessert of dessertList" [(value)]="dessert.id">
+				{{dessert.name}}</ion-select-option>
+		</ion-select>
+	</ion-item>
+	<ion-button (click)="registerCompleteCourse()" color="primary">Registrar</ion-button>
+</ion-content>
+
+<ion-content [hidden]="!completeCourseIdEdit">
+	<ion-input [ngModel]="completeCourseEdit?.name"
+		(ngModelChange)="completeCourseEdit?.name ? completeCourseEdit.name = $event : null" placeholder="Nome">
+	</ion-input>
+	<ion-input [ngModel]="completeCourseEdit?.description"
+		(ngModelChange)="completeCourseEdit?.description ? completeCourseEdit.description = $event : null"
+		placeholder="Description">
+	</ion-input>
+	<ion-input [ngModel]="completeCourseEdit?.photo"
+		(ngModelChange)="completeCourseEdit?.photo ? completeCourseEdit.photo = $event : null" placeholder="Photo">
+	</ion-input>
+	<input [ngModel]="completeCourseEdit?.price"
+		(ngModelChange)="completeCourseEdit?.price ? completeCourseEdit.price = $event : null" placeholder="Preço" currencyMask>
+	<ion-item>
+		<ion-label>Entrada:</ion-label>
+		<ion-select [(ngModel)]="completeCourseEdit.starterCourseId" cancelText="Cancelar">
+			<ion-select-option *ngFor="let starterCourse of starterCourseList" [(value)]="starterCourse.id">
+				{{starterCourse.name}}</ion-select-option>
+		</ion-select>
+	</ion-item>
+	<ion-item>
+		<ion-label>Prato Principal:</ion-label>
+		<ion-select [(ngModel)]="completeCourseEdit.mainCourseId" cancelText="Cancelar">
+			<ion-select-option *ngFor="let mainCourse of mainCourseList" [(value)]="mainCourse.id">
+				{{mainCourse.name}}</ion-select-option>
+		</ion-select>
+	</ion-item>
+	<ion-item>
+		<ion-label>Sobremesa:</ion-label>
+		<ion-select [(ngModel)]="completeCourseEdit.dessertId" cancelText="Cancelar">
+			<ion-select-option *ngFor="let dessert of dessertList" [(value)]="dessert.id">
+				{{dessert.name}}</ion-select-option>
+		</ion-select>
+	</ion-item>
+	<ion-button (click)="editCompleteCourse()" color="primary">Editar</ion-button>
+</ion-content>

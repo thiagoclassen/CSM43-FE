@@ -1,28 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-
-import { DessertService } from '../dessert.service';
-import { TokenService } from '../../guard/token.service';
-import { RestaurantsService } from '../../restaurants/restaurants.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CompleteCourseService } from '../complete.service';
+import { TokenService } from 'src/app/guard/token.service';
+import { RestaurantsService } from 'src/app/restaurants/restaurants.service';
 import { Location } from '@angular/common';
 import { OverlayService } from 'src/app/common/services/overlay.service';
 
 @Component({
-	selector: 'app-dessert-view',
-	templateUrl: './dessert-view.page.html',
-	styleUrls: ['./dessert-view.page.scss'],
+	selector: 'app-complete-course-view',
+	templateUrl: './complete-course-view.page.html',
+	styleUrls: ['./complete-course-view.page.scss'],
 })
-export class DessertViewPage {
-	private dessertId = null;
+export class CompleteCourseViewPage {
+	private completeCourseId = null;
 	private restaurantId = null;
-	private dessert = null;
+	private completeCourse = null;
 	private isEmployee = false;
 	private restaurant = null;
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		private location: Location,
 		private router: Router,
-		private dessertService: DessertService,
+		private completeCourseService: CompleteCourseService,
 		private tokenService: TokenService,
 		private restaurantService: RestaurantsService,
 		private overlayService: OverlayService) { }
@@ -30,7 +29,7 @@ export class DessertViewPage {
 	async ionViewWillEnter() {
 		let loading = await this.overlayService.loading();
 		this.restaurantId = this.activatedRoute.snapshot.paramMap.get('restaurantId');
-		this.dessertId = this.activatedRoute.snapshot.paramMap.get('id');
+		this.completeCourseId = this.activatedRoute.snapshot.paramMap.get('id');
 		this.restaurantService.getRestautant(this.restaurantId)
 			.subscribe(restaurantResponse => {
 				this.restaurant = restaurantResponse;
@@ -38,18 +37,18 @@ export class DessertViewPage {
 					this.verifyEmployeeUser();
 				}
 			});
-		this.dessertService.getDessert(this.restaurantId, this.dessertId)
-			.subscribe(dessertResponse => {
-				this.dessert = dessertResponse;
+		this.completeCourseService.getCompleteCourse(this.restaurantId, this.completeCourseId)
+			.subscribe(completeCourseResponse => {
+				this.completeCourse = completeCourseResponse;
 				loading.dismiss();
 			});
 	}
 
-	async deleteDessert(dessertId) {
+	async deleteDessert(completeCourseId) {
 		let loading = await this.overlayService.loading();
-		this.dessertService.removeDessert(this.restaurantId, dessertId)
+		this.completeCourseService.removeCompleteCourse(this.restaurantId, this.completeCourseId)
 			.subscribe(() => {
-				this.router.navigateByUrl(`restaurant/${this.restaurantId}/desserts`);
+				this.router.navigateByUrl(`restaurant/${this.restaurantId}/complete-courses`);
 				loading.dismiss();
 			});
 	}
@@ -61,6 +60,5 @@ export class DessertViewPage {
 			}
 		});
 	}
-
 
 }

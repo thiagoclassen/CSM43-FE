@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { StarterCourseService } from '../starter.service';
 import { TokenService } from '../../guard/token.service';
 import { RestaurantsService } from '../../restaurants/restaurants.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OverlayService } from 'src/app/common/services/overlay.service';
 import { Location } from '@angular/common';
 
@@ -20,6 +20,7 @@ export class StarterCourseViewPage {
 	private restaurant = null;
 	constructor(
 		private route: ActivatedRoute,
+		private router: Router,
 		private starterCourseService: StarterCourseService,
 		private tokenService: TokenService,
 		private location: Location,
@@ -47,7 +48,7 @@ export class StarterCourseViewPage {
 	async deleteStarterCourse(starterCourseId) {
 		let loading = await this.overlayService.loading();
 		this.starterCourseService.removeStarterCourse(this.restaurantId, starterCourseId).subscribe(() => {
-			this.location.back();
+			this.router.navigateByUrl(`restaurant/${this.restaurantId}/starter-courses`);
 			loading.dismiss();
 		});
 	}

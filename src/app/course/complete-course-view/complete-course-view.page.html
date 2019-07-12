@@ -1,0 +1,55 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>{{completeCourse?.name}}</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-list>
+		<ion-item>
+			<ion-label>Nome: {{completeCourse?.name}}</ion-label>
+		</ion-item>
+		<ion-item>
+			<ion-label>Descrição: {{completeCourse?.description}}</ion-label>
+		</ion-item>
+		<ion-item>
+			<ion-label>Imagem: {{completeCourse?.photo}}</ion-label>
+		</ion-item>
+		<ion-item>
+			<ion-label>Preço: R${{completeCourse?.price}}</ion-label>
+		</ion-item>
+		<ion-card>
+			<ion-card-header>
+				<ion-card-title>Entrada:{{completeCourse?.starterCourse?.name}}</ion-card-title>
+			</ion-card-header>
+			<ion-card-content>
+				<p>{{completeCourse?.starterCourse?.description}}</p>
+				<p>{{completeCourse?.starterCourse?.photo}}</p>
+			</ion-card-content>
+		</ion-card>
+		<ion-card>
+			<ion-card-header>
+				<ion-card-title>Prato Principal:{{completeCourse?.mainCourse?.name}}</ion-card-title>
+			</ion-card-header>
+			<ion-card-content>
+				<p>{{completeCourse?.mainCourse?.description}}</p>
+				<p>{{completeCourse?.mainCourse?.photo}}</p>
+			</ion-card-content>
+		</ion-card>
+		<ion-card>
+			<ion-card-header>
+				<ion-card-title>Sobremesa:{{completeCourse?.dessert?.name}}</ion-card-title>
+			</ion-card-header>
+			<ion-card-content>
+				<p>{{completeCourse?.dessert?.description}}</p>
+				<p>{{completeCourse?.dessert?.photo}}</p>
+			</ion-card-content>
+		</ion-card>
+	</ion-list>
+	<ion-button [hidden]="!isEmployee" routerLink="/restaurant/{{restaurantId}}/complete-course-form"
+		[queryParams]="{editId: completeCourse?.id }">Editar</ion-button>
+	<ion-button [hidden]="!isEmployee" (click)="deleteDessert(completeCourse.id)">Deletar</ion-button>
+</ion-content>

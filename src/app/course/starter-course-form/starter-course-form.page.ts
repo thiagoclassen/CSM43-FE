@@ -3,6 +3,7 @@ import { StarterCourseService } from '../starter.service';
 import { ActivatedRoute } from '@angular/router';
 import { OverlayService } from 'src/app/common/services/overlay.service';
 import { Location } from '@angular/common';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
 	selector: 'app-starter-course-form',
@@ -19,7 +20,8 @@ export class StarterCourseFormPage implements OnInit {
 		private route: ActivatedRoute,
 		private location: Location,
 		private starterCourseService: StarterCourseService,
-		private overlayService: OverlayService) {
+		private overlayService: OverlayService,
+		private camera: Camera) {
 		this.starterCourse = {
 			name: '',
 			description: '',
@@ -62,6 +64,22 @@ export class StarterCourseFormPage implements OnInit {
 				this.location.back();
 				loading.dismiss();
 			});
+	}
+
+	takePicture() {
+		const options: CameraOptions = {
+			quality: 20,
+			destinationType: this.camera.DestinationType.DATA_URL,
+			encodingType: this.camera.EncodingType.JPEG,
+			mediaType: this.camera.MediaType.PICTURE
+		}
+
+		this.camera.getPicture(options).then((imageData) => {
+			let base64Image = 'data:image/jpeg;base64,' + imageData;
+			this.starterCourse.photo = base64Image;
+		}, (err) => {
+			// Handle error
+		});
 	}
 
 }

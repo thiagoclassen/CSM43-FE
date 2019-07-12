@@ -16,7 +16,7 @@
 			<ion-label>Descrição: {{mainCourse?.description}}</ion-label>
 		</ion-item>
 		<ion-item>
-			<ion-label>Imagem: {{mainCourse?.photo}}</ion-label>
+				<img  [src]="mainCourse.photo" alt="Select Image"/>
 		</ion-item>
 	</ion-list>
 	<ion-button [hidden]="!isEmployee" routerLink="/restaurant/{{restaurantId}}/main-course-form"

@@ -3,6 +3,7 @@ import { DessertService } from '../dessert.service';
 import { ActivatedRoute } from '@angular/router';
 import { OverlayService } from '../../common/services/overlay.service';
 import { Location } from '@angular/common';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
 	selector: 'app-dessert-form',
@@ -19,7 +20,8 @@ export class DessertFormPage implements OnInit {
 		private route: ActivatedRoute,
 		private location: Location,
 		private dessertService: DessertService,
-		private overlayService: OverlayService) {
+		private overlayService: OverlayService,
+		private camera: Camera) {
 		this.dessert = {
 			name: '',
 			description: '',
@@ -63,4 +65,19 @@ export class DessertFormPage implements OnInit {
 			});
 	}
 
+	takePicture() {
+		const options: CameraOptions = {
+			quality: 20,
+			destinationType: this.camera.DestinationType.DATA_URL,
+			encodingType: this.camera.EncodingType.JPEG,
+			mediaType: this.camera.MediaType.PICTURE
+		}
+
+		this.camera.getPicture(options).then((imageData) => {
+			let base64Image = 'data:image/jpeg;base64,' + imageData;
+			this.dessert.photo = base64Image;
+		}, (err) => {
+			// Handle error
+		});
+	}
 }

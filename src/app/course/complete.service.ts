@@ -1,43 +1,43 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { TokenService } from '../guard/token.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class CompleteCourseService {
 
-  constructor(private http: HttpClient) { }
+	path = 'https://csm43-be.herokuapp.com';
 
-  listCompleteCourses() {
+	constructor(private http: HttpClient, private tokenService: TokenService) { }
 
-    let url = '/users/:userId/restaurants/:restaurantId/completeCourses';
+	listCompleteCourses(restaurantId): Observable<any[]> {
+		let url = this.path + `/restaurants/${restaurantId}/completeCourses`;
+		return this.http.get<any>(url);
+	}
 
-    return this.http.get(url);
+	getCompleteCourse(restaurantId, completeCourseId): Observable<any[]> {
+		let url = this.path + `/restaurants/${restaurantId}/completeCourses/${completeCourseId}`;
+		return this.http.get<any>(url);
+	}
 
-  }
+	createCompleteCourse(restaurantId, completeCourse): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `/users/${userId}/restaurants/${restaurantId}/completeCourses`;
+		return this.http.post<any>(url, completeCourse);
+	}
 
-  getCompleteCourse() {
+	patchCompleteCourse(restaurantId, completeCourse): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `/users/${userId}/restaurants/${restaurantId}/completeCourses/${completeCourse.id}`;
+		return this.http.patch<any>(url, completeCourse);
+	}
 
-    let url = '/users/:userId/restaurants/:restaurantId/completeCourses/:completeCourseId';
-
-    return this.http.get(url);
-
-  }
-
-  createCompleteCourse(course) {
-
-    let url = '/users/:userId/restaurants/:restaurantId/completeCourses';
-
-    return this.http.post(url, course);
-
-  }
-
-  removeCompleteCourse(courseId) {
-
-    let url = '/users/:userId/restaurants/:restaurantId/completeCourses/:completeCourseId';
-
-    return this.http.delete(url);
-
-  }
+	removeCompleteCourse(restaurantId, completeCourseId): Observable<any[]> {
+		let userId = this.tokenService.getUserId();
+		let url = this.path + `/users/${userId}/restaurants/${restaurantId}/completeCourses/${completeCourseId}`;
+		return this.http.delete<any>(url);
+	}
 
 }

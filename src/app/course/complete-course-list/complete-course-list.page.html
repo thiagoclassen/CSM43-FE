@@ -1,0 +1,26 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>Lista de Pratos Completos</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-button [hidden]="!isEmployee" routerLink="/restaurant/{{restaurantId}}/complete-course-form">Criar Prato Completo
+	</ion-button>
+	<ion-list>
+		<ion-item *ngFor="let completeCourse of completeCourseList">
+			<div class="item-note" routerLink="/restaurant/{{restaurantId}}/complete-course/{{completeCourse.id}}">
+				<p>{{completeCourse.name}}</p>
+				<p>{{completeCourse.description}}</p>
+				<p>{{completeCourse.photo}}</p>
+				<p>R$:{{completeCourse.price}}</p>
+			</div>
+		</ion-item>
+		<ion-item *ngIf="completeCourseList.length <= 0 || !completeCourseList">
+			Nenhum prato completo disponível.
+		</ion-item>
+	</ion-list>
+</ion-content>

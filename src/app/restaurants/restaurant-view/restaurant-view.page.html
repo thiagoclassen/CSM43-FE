@@ -22,6 +22,12 @@
 			<ion-label>Mesas Totais: {{restaurant.tables}}</ion-label>
 		</ion-item>
 		<ion-item>
+			<ion-label>Telefone: {{restaurant.phoneNumber}}</ion-label>
+		</ion-item>
+		<ion-item>
+			<ion-label>e-mail: {{restaurant.email}}</ion-label>
+		</ion-item>
+		<ion-item>
 			<ion-label>Mesas Disponiveis: {{restaurant.tomorrowAvailableTables}}</ion-label>
 		</ion-item>
 		<ion-item>
@@ -32,11 +38,14 @@
 		</ion-item>
 	</ion-list>
 	<ion-button (click)="createReservation()">Fazer Reserva</ion-button>
+	<ion-button (click)="contactNumber()">Telefonar</ion-button>
+	<ion-button (click)="contactEmail()">Email</ion-button>
 	<ion-button [routerLink]="['/restaurant', restaurant.id, 'starter-courses']">Entradas</ion-button>
 	<ion-button [routerLink]="['/restaurant', restaurant.id, 'main-courses']">Pratos Principais</ion-button>
 	<ion-button [routerLink]="['/restaurant', restaurant.id, 'desserts']">Sobremesas</ion-button>
 	<ion-button [routerLink]="['/restaurant', restaurant.id, 'complete-courses']">Pratos Completos</ion-button>
 	<ion-button [routerLink]="['/restaurant', restaurant.id, 'ratings']">Avaliações</ion-button>
+
 	<ion-list [hidden]="!isEmployee">
 		Reservas:
 		<ion-item *ngFor="let reservation of reservationsList">
